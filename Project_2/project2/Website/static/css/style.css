@@ -1,0 +1,67 @@
+body {
+    background: rgb(182, 191, 196);
+  }
+  
+  #bio-image {
+    float: left;
+  }
+  
+.my-nav{
+  background-color: rgb(225, 228, 225);
+}
+.my-nav .nav-link{
+  color: rgb(8, 8, 8);
+}
+
+.my-nav .nav-link:hover{
+  color: darkturquoise;
+}
+
+.container {
+  background-color: rgb(253, 253, 253);
+}
+
+#latitude_box {
+  background-color: darkturquoise;
+  font-size: large;
+  color: rgb(252, 250, 250);
+}
+
+
+/* p {
+  display: inline;
+} */
+
+h1 {
+  color: darkturquoise;
+}
+
+h3 {
+  color: darkturquoise;
+}
+
+#colored_font {
+  color: darkturquoise;
+}
+
+/* Here we define some styles that will ONLY be applied at screen sizes below 480 pixels */
+@media (max-width: 480px) {
+  .my-nav {
+    padding: 10px;
+  }
+
+  .container {
+    margin-right: 30px;
+    margin-left: 30px;
+    align-content: center;
+  }
+
+  .my-nav{
+    visibility: hidden;
+  }
+
+  .my-nav .nav-link {
+    visibility: visible;
+  }
+}
+

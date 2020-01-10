@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <center><h2>Chart.js — Line Chart Example</h2></center>
+
+</div>
+      <div class="container">
+      
+
+        <div>
+      <canvas id="line-chart" width="800" height="450">Canvas</canvas>
+    </div>
+</div>
+    
+      <script>
+
+    new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+                labels : {{labels | safe}},
+                
+                datasets:
+                    [{ 
+                    data: [
+                    {% for value in good_values  %}
+                    {{ value | safe}},
+                    {% endfor %}
+
+                      ],
+                        label: "good",
+                        borderColor: 'green',
+                        fill: false
+                },
+                    { 
+                    data: [
+                        {% for value in bad_values  %}
+                            {{ value | safe}},
+                        {% endfor %}
+
+                      ],
+                        label: "Bad",
+                        borderColor: 'darkgray',
+                        fill: false
+                }
+            ]
+            },
+            options: {
+                cutoutPercentage: 85,
+                title: {
+                    display: true,
+                    text: 'Percentage of good and bad jobs by age',
+                    fontSize: 20,
+                    fontStyle: "Bold"
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            labelString: "Groups of Ages",
+                            display: true,
+                            lineHeight: 2,
+                            fontSize: 20,
+                            fontStyle: "Bold"
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            labelString: "Percentages",
+                            display: true,
+                            lineHeight: 2,
+                            fontSize: 16,
+                            fontStyle: "Bold"
+                        }
+                    }]
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                           
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += data.datasets[0].data[tooltipItem['index']];
+                            label = label + '%';
+                            return label;
+                        }
+                        ,
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += data.datasets[1].data[tooltipItem['index']];
+                            label = label + '%';
+                            return label;
+                        }
+                    }
+                }
+            }
+    });
+    </script>
+    {% endblock %}
+      </body>
+      </html>
+

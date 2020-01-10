@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <center><h2>Chart.js — Bar Chart Example</h2></center>
+
+</div>
+<div class="container">
+  
+
+  <div>
+      <div class="container">
+        
+
+        <div>
+      <canvas id="bar-chart-grouped" width="800" height="450">Canvas</canvas>
+    </div>
+</div>
+
+<script>
+
+
+new Chart(document.getElementById("bar-chart-grouped"), {
+    type: 'bar',
+    data: {
+      labels: 
+ 
+          {{group_labels | safe}},
+      datasets: [
+        {
+          label: "Small, under 20 employees",
+          backgroundColor: "silver",
+          data: [
+
+          {% for value in m2049  %}
+                            {{ value | safe}},
+                        {% endfor %}
+          ]
+   
+        }, 
+        
+        
+        {
+          label: "Mid-sized, 20-499 employees",
+          backgroundColor: "indigo",
+          data: [
+          {% for value in m5089  %}
+                            {{ value | safe}},
+                        {% endfor %}
+          ]
+          
+        },
+
+        {
+          label: "Large, 500 more employees",
+          backgroundColor: "gold",
+          data: [
+
+          {% for value in t90  %}
+                {{ value | safe}},
+          {% endfor %}
+
+          ]
+        }
+
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Percentage of workers in good jobs, by income and size of company',
+        fontSize: 20,
+        fontStyle: "Bold"
+      },
+      scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            labelString: "Small, under 20 employees Mid-sized, 20-499 employees Large, 500 more employees",
+                            display: false,
+                            lineHeight: 2,
+                            fontSize: 20,
+                            fontStyle: "Bold"
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            labelString: "Percentages",
+                            display: true,
+                            lineHeight: 2,
+                            fontSize: 16,
+                            fontStyle: "Bold"
+                        }
+                    }]
+                },
+    }
+});
+
+
+</script>
+{% endblock %}
+</body>
+</html>
